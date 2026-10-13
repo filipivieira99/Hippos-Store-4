@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hippo's Store - loja virtual de produtos para casa.">
+<title>Hippo's Store | Loja Virtual</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div>
+      <a href="#contato">Atendimento</a>
+      <span>|</span>
+      <a href="#contato">Novidades</a>
+      <span>|</span>
+      <span>Siga a Hippo's</span>
+      <a href="#inicio">f</a><a href="#inicio">◎</a><a href="#inicio">♪</a>
+    </div>
+    <div>
+      <a href="#contato">🔔 Avisos</a>
+      <a href="#contato">Ajuda</a>
+      <a href="#contato">Português</a>
+    </div>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap header-main">
+    <a class="brand" href="#inicio" aria-label="Hippo's Store">
+      <img src="logo.jpeg" alt="Logo Hippo's Store">
+    </a>
+
+    <form class="search" action="#produtos">
+      <label class="sr-only" for="busca">Pesquisar produtos</label>
+      <input id="busca" type="search" placeholder="Busque produtos para sua casa...">
+      <button type="submit">🔍</button>
+      <div class="search-suggestions">
+        <span>organizador</span><span>cozinha</span><span>luminária</span><span>limpeza</span>
+      </div>
+    </form>
+
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">🌙</button>
+    <a class="cart" href="#carrinho" aria-label="Abrir carrinho de compras">🛒<b>0</b></a>
+  </div>
+
+  <nav class="wrap nav" aria-label="Categorias principais">
+    <a href="#produtos" data-category="todos" aria-label="Mostrar todos os produtos">Todos os produtos</a>
+    <a href="#ofertas">Ofertas do dia</a>
+    <a href="#produtos" data-category="decoracao">Casa & Decoração</a>
+    <a href="#produtos" data-category="cozinha">Cozinha</a>
+    <a href="#produtos" data-category="organizacao">Organização</a>
+    <a href="#produtos" data-category="limpeza">Limpeza</a>
+    <a href="#produtos" data-category="banheiro">Banheiro</a>
+    <a href="#produtos" data-category="novidades">Novidades</a>
+    <a href="#ofertas">🔥 Ofertas relâmpago</a>
+  </nav>
+</header>
+
+<div id="overlay" class="overlay" aria-hidden="true"></div>
+
+<aside id="cartDrawer" class="cart-drawer" aria-label="Carrinho de compras">
+  <div class="cart-head"><div><strong>Seu carrinho</strong><span id="cartSubtitle">Itens selecionados</span></div><button id="closeCart" type="button" aria-label="Fechar carrinho">×</button></div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="coupon-availability" id="couponAvailability" hidden>
+      <strong>🎟️ Cupons disponíveis</strong>
+      <span id="couponAvailabilityText"></span>
+      <button id="availableCouponButton" type="button">Aplicar cupom</button>
+    </div>
+    <div class="cart-coupon-row" id="cartCouponRow" hidden>
+      <span id="cartCouponLabel">Cupom</span>
+      <button id="removeCoupon" type="button">Remover</button>
+      <strong id="cartDiscount">- R$ 0,00</strong>
+    </div>
+    <div class="cart-total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div><button id="checkout" class="checkout-btn" type="button">Finalizar compra</button><button class="continue-btn" type="button" data-close-cart>Continuar comprando</button></div>
+</aside>
+
+<div id="productModal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <button id="closeModal" class="modal-close" type="button" aria-label="Fechar">×</button>
+    <div class="modal-grid"><div class="modal-photo"><img id="modalImg" src="" alt=""></div><div class="modal-info"><small id="modalCategory"></small><h2 id="modalTitle"></h2><div class="modal-stars">★★★★★ <span>Produto bem avaliado</span></div><div id="modalOffer" class="modal-offer" hidden>5% OFF exclusivo no destaque</div><strong id="modalOldPrice" class="modal-old-price" hidden></strong><strong id="modalPrice" class="modal-price">R$ 0,00</strong><p>Produto selecionado da Hippo's Store. Escolha a quantidade e adicione ao carrinho.</p><div class="modal-actions"><div class="qty-picker"><button id="modalMinus" type="button">−</button><input id="modalQty" type="number" min="1" value="1" aria-label="Quantidade"><button id="modalPlus" type="button">+</button></div><button id="modalAdd" class="buy-btn" type="button">Adicionar ao carrinho</button></div></div></div>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<main id="inicio">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-banner">
+      <div class="banner-copy">
+        <span>LOJA VIRTUAL HIPPO'S STORE</span>
+        <h1>Tudo para sua casa<br><strong>em um só lugar!</strong></h1>
+        <p>Produtos úteis e criativos para facilitar sua rotina, com compra simples e segura.</p>
+        <a class="orange-btn" href="#produtos">Ver produtos</a>
+      </div>
+      <div class="hippo-art">
+        <div class="circle"></div>
+        <img src="logo.jpeg" alt="Mascote Hippo's Store" class="banner-logo">
+      </div>
+    </div>
+
+    <aside class="hero-side">
+      <div class="side-card">
+        <span>🎟️</span>
+        <div><small>COLEÇÃO DE</small><strong>Cupons exclusivos</strong><p>Ganhe descontos exclusivos</p></div>
+        <a href="#ofertas">Pegar</a>
+      </div>
+      <div class="side-card blue">
+        <span>🚚</span>
+        <div><small>COMODIDADE</small><strong>Compra fácil e segura</strong><p>Encontre seus favoritos na nossa loja</p></div>
+        <a href="#produtos">Ver</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="categorias" class="categories-section">
+  <div class="wrap">
+    <div class="section-title"><h2>Compre por categoria</h2><span>Encontre o que você precisa</span></div>
+    <div class="categories">
+      <a href="#produtos" data-category="cozinha"><i class="cat-icon pink">🍳</i><strong>Cozinha</strong><small>+100 itens</small></a>
+      <a href="#produtos" data-category="organizacao"><i class="cat-icon yellow">🧺</i><strong>Organização</strong><small>+80 itens</small></a>
+      <a href="#produtos" data-category="limpeza"><i class="cat-icon green">🧽</i><strong>Limpeza</strong><small>+60 itens</small></a>
+      <a href="#produtos" data-category="iluminacao"><i class="cat-icon blue">💡</i><strong>Iluminação</strong><small>+40 itens</small></a>
+      <a href="#produtos" data-category="banheiro"><i class="cat-icon purple">🛁</i><strong>Banheiro</strong><small>+50 itens</small></a>
+      <a href="#produtos" data-category="decoracao"><i class="cat-icon orange">🏠</i><strong>Decoração</strong><small>+90 itens</small></a>
+      <a href="#produtos" data-category="utilidades"><i class="cat-icon cyan">📦</i><strong>Utilidades</strong><small>+120 itens</small></a>
+      <a href="#produtos" data-category="novidades"><i class="cat-icon red">✨</i><strong>Novidades</strong><small>Confira</small></a>
+    </div>
+  </div>
+</section>
+
+<section id="ofertas" class="flash">
+  <div class="wrap">
+    <div class="flash-head">
+      <div><h2>Ofertas da semana ⚡</h2><span>Condições especiais por tempo limitado</span><div class="countdown" id="countdown" aria-live="polite" aria-label="Tempo restante da oferta"><b id="countHours">02</b><em>:</em><b id="countMinutes">45</b><em>:</em><b id="countSeconds">18</b></div></div>
+      <a href="#produtos">Ver mais ›</a>
+    </div>
+
+    <div class="flash-products">
+      <article class="flash-product" data-flash-id="luminaria-led-touch-recarregavel" tabindex="0" role="button" aria-label="Ver detalhes do produto">
+        <div class="flash-img img1"><img src="https://down-br.img.susercontent.com/file/sg-11134201-7rdvl-m0rwwel6mcfu80" alt="Luminária LED"><label>-28%</label></div>
+        <strong>R$ 49,90</strong><del>R$ 69,90</del><div class="sold"><span style="width:72%"></span></div><small>72 vendidos</small><button class="flash-buy" type="button">Aproveitar oferta</button>
+      </article>
+      <article class="flash-product" data-flash-id="organizador-multiuso-para-cozinha" tabindex="0" role="button" aria-label="Ver detalhes do produto">
+        <div class="flash-img img2"><img src="https://media.adeo.com/mkp/46a91c0130c9d4ace64d61629037e7cc/media.jpg?fit=bounds&format=jpg&height=1200&quality=80&width=1200" alt="Organizador de cozinha"><label>-35%</label></div>
+        <strong>R$ 29,90</strong><del>R$ 45,90</del><div class="sold"><span style="width:58%"></span></div><small>58 vendidos</small><button class="flash-buy" type="button">Aproveitar oferta</button>
+      </article>
+      <article class="flash-product" data-flash-id="kit-de-utensilios-de-cozinha-8-pecas" tabindex="0" role="button" aria-label="Ver detalhes do produto">
+        <div class="flash-img img3"><img src="https://down-br.img.susercontent.com/file/sg-11134201-7qvex-lfd54i6lt9k7f9" alt="Kit de utensílios"><label>-25%</label></div>
+        <strong>R$ 59,90</strong><del>R$ 79,90</del><div class="sold"><span style="width:82%"></span></div><small>82 vendidos</small><button class="flash-buy" type="button">Aproveitar oferta</button>
+      </article>
+      <article class="flash-product" data-flash-id="esponja-eletrica-giratoria-360" tabindex="0" role="button" aria-label="Ver detalhes do produto">
+        <div class="flash-img img4"><img src="https://a-static.mlcdn.com.br/800x800/escova-eletrica-usb-super-azulejo-microfibra-360o-ajustavel-para-limpeza-banheiro-pia-higa/higashop2/escova-giratoria-limpeza-188/4284d36dcb07eed8233991f061177ad8.jpeg" alt="Esponja elétrica"><label>-30%</label></div>
+        <strong>R$ 89,90</strong><del>R$ 129,90</del><div class="sold"><span style="width:44%"></span></div><small>44 vendidos</small><button class="flash-buy" type="button">Aproveitar oferta</button>
+      </article>
+      <article class="flash-product" data-flash-id="vassoura-magica-para-casa" tabindex="0" role="button" aria-label="Ver detalhes do produto">
+        <div class="flash-img img5"><img src="https://a-static.mlcdn.com.br/800x560/vassoura-magica-flash-limp-360-graus-base-flexivel-cerdas-giratorias/lcgeletro/mop0184/50d1c3cd19348c0a8cfbcf9701a8ecd7.jpeg" alt="Vassoura mágica"><label>-22%</label></div>
+        <strong>R$ 49,90</strong><del>R$ 63,90</del><div class="sold"><span style="width:67%"></span></div><small>67 vendidos</small><button class="flash-buy" type="button">Aproveitar oferta</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="coupon-section" aria-label="Cupons de desconto">
+  <div class="wrap coupons">
+    <div class="coupon-title"><strong>🎟️ Cupons da Hippo's</strong><span>Economize ainda mais na sua compra</span></div>
+    <div class="coupon" data-coupon="HIPPO10" data-discount="10" data-minimum="80">
+      <div><b>R$ 10 OFF</b><span>R$ 80 em produtos elegíveis · Código: <strong>HIPPO10</strong></span></div>
+      <button type="button">Aplicar</button>
+    </div>
+    <div class="coupon" data-coupon="HIPPO20" data-discount="20" data-minimum="150">
+      <div><b>R$ 20 OFF</b><span>R$ 150 em produtos elegíveis · Código: <strong>HIPPO20</strong></span></div>
+      <button type="button">Aplicar</button>
+    </div>
+    <div class="coupon" data-coupon="HIPPO30" data-discount="30" data-minimum="250">
+      <div><b>R$ 30 OFF</b><span>R$ 250 em produtos elegíveis · Código: <strong>HIPPO30</strong></span></div>
+      <button type="button">Aplicar</button>
+    </div>
+  </div>
+</section>
+
+
+<section id="destaques" class="featured-section" aria-label="Produtos em destaque">
+  <div class="wrap">
+    <div class="section-title">
+      <div>
+        <span class="featured-kicker">⭐ OFERTA ESPECIAL</span>
+        <h2>Produtos em destaque</h2>
+      </div>
+      <span class="featured-note">5% OFF exclusivo no produto em destaque</span>
+    </div>
+
+    <div class="featured-grid">
+      <article class="featured-card" data-featured-id="luminaria-led-touch-recarregavel" data-featured="true" tabindex="0">
+        <div class="featured-image">
+          <img src="https://down-br.img.susercontent.com/file/sg-11134201-7rdvl-m0rwwel6mcfu80" alt="Luminária LED Touch Recarregável">
+          <span>5% OFF</span>
+        </div>
+        <div class="featured-info">
+          <small>Casa e decoração</small>
+          <h3>Luminária LED Touch Recarregável</h3>
+          <p>Toque, praticidade e iluminação para qualquer ambiente.</p>
+          <div class="featured-price">
+            <del>R$ 49,90</del>
+            <strong>R$ 47,41</strong>
+          </div>
+          <button class="featured-buy" type="button">Comprar com 5% OFF</button>
+        </div>
+      </article>
+
+      <article class="featured-card" data-featured-id="kit-de-utensilios-de-cozinha-8-pecas" data-featured="true" tabindex="0">
+        <div class="featured-image">
+          <img src="https://down-br.img.susercontent.com/file/sg-11134201-7qvex-lfd54i6lt9k7f9" alt="Kit de Utensílios de Cozinha 8 Peças">
+          <span>5% OFF</span>
+        </div>
+        <div class="featured-info">
+          <small>Cozinha</small>
+          <h3>Kit de Utensílios de Cozinha 8 Peças</h3>
+          <p>Kit completo para facilitar as tarefas da sua cozinha.</p>
+          <div class="featured-price">
+            <del>R$ 59,90</del>
+            <strong>R$ 56,91</strong>
+          </div>
+          <button class="featured-buy" type="button">Comprar com 5% OFF</button>
+        </div>
+      </article>
+
+      <article class="featured-card" data-featured-id="esponja-eletrica-giratoria-360" data-featured="true" tabindex="0">
+        <div class="featured-image">
+          <img src="https://a-static.mlcdn.com.br/800x800/escova-eletrica-usb-super-azulejo-microfibra-360o-ajustavel-para-limpeza-banheiro-pia-higa/higashop2/escova-giratoria-limpeza-188/4284d36dcb07eed8233991f061177ad8.jpeg" alt="Esponja Elétrica Giratória 360 graus">
+          <span>5% OFF</span>
+        </div>
+        <div class="featured-info">
+          <small>Limpeza</small>
+          <h3>Esponja Elétrica Giratória 360°</h3>
+          <p>Limpeza prática com menos esforço no dia a dia.</p>
+          <div class="featured-price">
+            <del>R$ 89,90</del>
+            <strong>R$ 85,41</strong>
+          </div>
+          <button class="featured-buy" type="button">Comprar com 5% OFF</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="produtos" class="products-section">
+  <div class="wrap">
+    <div class="section-title products-title"><div><h2 id="productsHeading">Todos os produtos</h2><p id="productsSubheading" class="products-subheading">Confira todo o catálogo da Hippo's Store.</p></div><div class="product-toolbar"><button id="showAllProducts" class="back-all" type="button" aria-label="Mostrar todos os produtos">Todos os produtos</button><button class="filter active" type="button" data-filter="todos">Todos</button><button class="filter" type="button" data-filter="mais-vendidos">Mais vendidos</button><button class="filter" type="button" data-filter="novidades">Novidades</button></div></div>
+
+    <p id="apiStatus" class="api-status" role="status">Carregando produtos adicionais da API pública...</p>
+    <div class="products" id="productGrid">
+      <article class="product" data-id="luminaria-led-touch-recarregavel" data-price="49.90">
+        <div class="p-img p1"><img src="https://down-br.img.susercontent.com/file/sg-11134201-7rdvl-m0rwwel6mcfu80" alt="Luminária LED Touch Recarregável"><label>TOP</label><button type="button" aria-label="Favoritar">♡</button></div>
+        <div class="p-body"><small>Casa e decoração</small><h3>Luminária LED Touch Recarregável</h3><div class="rating">★★★★★ <b>4.9</b> <i>1,2 mil</i></div><div class="price"><small>R$</small><strong>49,90</strong><em>12x R$ 4,82</em></div><div class="shipping">🚚 Frete grátis</div><button class="buy-btn" type="button">Comprar</button></div>
+      </article>
+
+      <article class="product" data-id="organizador-multiuso-para-cozinha" data-price="29.90">
+        <div class="p-img p2"><img src="https://media.adeo.com/mkp/46a91c0130c9d4ace64d61629037e7cc/media.jpg?fit=bounds&format=jpg&height=1200&quality=80&width=1200" alt="Organizador Multiuso para Cozinha"><label>OFERTA</label><button type="button" aria-label="Favoritar">♡</button></div>
+        <div class="p-body"><small>Organização</small><h3>Organizador Multiuso para Cozinha</h3><div class="rating">★★★★★ <b>4.8</b> <i>896</i></div><div class="price"><small>R$</small><strong>29,90</strong><em>5x R$ 6,12</em></div><div class="shipping">🚚 Frete grátis</div><button class="buy-btn" type="button">Comprar</button></div>
+      </article>
+
+      <article class="product" data-id="kit-de-utensilios-de-cozinha-8-pecas" data-price="59.90">
+        <div class="p-img p3"><img src="https://down-br.img.susercontent.com/file/sg-11134201-7qvex-lfd54i6lt9k7f9" alt="Kit de Utensílios de Cozinha 8 Peças"><label>MAIS VENDIDO</label><button type="button" aria-label="Favoritar">♡</button></div>
+        <div class="p-body"><small>Cozinha</small><h3>Kit de Utensílios de Cozinha 8 Peças</h3><div class="rating">★★★★★ <b>4.9</b> <i>2,4 mil</i></div><div class="price"><small>R$</small><strong>59,90</strong><em>12x R$ 5,79</em></div><div class="shipping">🚚 Frete grátis</div><button class="buy-btn" type="button">Comprar</button></div>
+      </article>
+
+      <article class="product" data-id="esponja-eletrica-giratoria-360" data-price="89.90">
+        <div class="p-img p4"><img src="https://a-static.mlcdn.com.br/800x800/escova-eletrica-usb-super-azulejo-microfibra-360o-ajustavel-para-limpeza-banheiro-pia-higa/higashop2/escova-giratoria-limpeza-188/4284d36dcb07eed8233991f061177ad8.jpeg" alt="Esponja Elétrica Giratória 360 graus"><button type="button" aria-label="Favoritar">♡</button></div>
+        <div class="p-body"><small>Limpeza</small><h3>Esponja Elétrica Giratória 360°</h3><div class="rating">★★★★★ <b>4.7</b> <i>438</i></div><div class="price"><small>R$</small><strong>89,90</strong><em>12x R$ 8,69</em></div><div class="shipping">🚚 Frete grátis</div><button class="buy-btn" type="button">Comprar</button></div>
+      </article>
+
+      <article class="product" data-id="vassoura-magica-para-casa" data-price="49.90">
+        <div class="p-img p5"><img src="https://a-static.mlcdn.com.br/800x560/vassoura-magica-flash-limp-360-graus-base-flexivel-cerdas-giratorias/lcgeletro/mop0184/50d1c3cd19348c0a8cfbcf9701a8ecd7.jpeg" alt="Vassoura Mágica para Casa"><label>-22%</label><button type="button" aria-label="Favoritar">♡</button></div>
+        <div class="p-body"><small>Limpeza</small><h3>Vassoura Mágica para Casa</h3><div class="rating">★★★★★ <b>4.8</b> <i>731</i></div><div class="price"><small>R$</small><strong>49,90</strong><em>9x R$ 5,54</em></div><div class="shipping">🚚 Frete grátis</div><button class="buy-btn" type="button">Comprar</button></div>
+      </article>
+
+      <article class="product" data-id="ducha-com-filtro-e-3-modos" data-price="79.90">
+        <div class="p-img p6"><img src="https://znove.com/cdn/shop/files/lZQttranslated_5_700x_c4c586fc-8598-41d8-a3c5-60f15b5ed4bf_800x.jpg?v=1711052663" alt="Ducha com Filtro e 3 Modos"><button type="button" aria-label="Favoritar">♡</button></div>
+        <div class="p-body"><small>Banheiro</small><h3>Ducha com Filtro e 3 Modos</h3><div class="rating">★★★★★ <b>4.8</b> <i>512</i></div><div class="price"><small>R$</small><strong>79,90</strong><em>12x R$ 7,72</em></div><div class="shipping">🚚 Frete grátis</div><button class="buy-btn" type="button">Comprar</button></div>
+      </article>
+
+      <article class="product" data-id="luminaria-decorativa-de-mesa" data-price="69.90">
+        <div class="p-img p7"><img src="https://www.taschibra.com.br/pt_BR/produto-imagem/398814" alt="Luminária Decorativa de Mesa"><button type="button" aria-label="Favoritar">♡</button></div>
+        <div class="p-body"><small>Decoração</small><h3>Luminária Decorativa de Mesa</h3><div class="rating">★★★★★ <b>4.9</b> <i>308</i></div><div class="price"><small>R$</small><strong>69,90</strong><em>12x R$ 6,75</em></div><div class="shipping">🚚 Frete grátis</div><button class="buy-btn" type="button">Comprar</button></div>
+      </article>
+
+      <article class="product" data-id="caixa-organizadora-dobravel" data-price="39.90">
+        <div class="p-img p8"><img src="https://down-br.img.susercontent.com/file/sg-11134201-7rcf7-ltlof3jlhtoi59" alt="Caixa Organizadora Dobrável"><label>NOVO</label><button type="button" aria-label="Favoritar">♡</button></div>
+        <div class="p-body"><small>Utilidades</small><h3>Caixa Organizadora Dobrável</h3><div class="rating">★★★★★ <b>4.8</b> <i>174</i></div><div class="price"><small>R$</small><strong>39,90</strong><em>7x R$ 6,24</em></div><div class="shipping">🚚 Frete grátis</div><button class="buy-btn" type="button">Comprar</button></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="newsletter">
+  <div class="wrap newsletter-inner">
+    <div><h2>Receba as melhores ofertas 💙</h2><p>Cadastre seu e-mail para não perder novidades e cupons da Hippo's Store.</p></div>
+    <form action="#" method="post"><label class="sr-only" for="email">Seu e-mail</label><input id="email" type="email" placeholder="Digite seu e-mail" required><button type="submit">Cadastrar</button></form>
+  </div>
+</section>
+
+</main>
+
+
+<section id="orderSuccess" class="order-success" hidden aria-live="polite">
+  <div class="wrap">
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <span class="success-kicker">PEDIDO RECEBIDO</span>
+      <h2>Compra realizada com sucesso!</h2>
+      <p id="successMessage">Obrigado por comprar na Hippo's Store.</p>
+      <div id="successDetails" class="success-details"></div>
+      <button id="successContinue" class="checkout-btn" type="button">Continuar comprando</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div><img src="logo.jpeg" alt="Hippo's Store"><p>Produtos para deixar sua casa mais prática, bonita e divertida.</p></div>
+    <div><h3>ATENDIMENTO</h3><a href="#contato">Central de ajuda</a><a href="#contato">Fale conosco</a><a href="#contato">Política de troca</a></div>
+    <div><h3>SOBRE A LOJA</h3><a href="#inicio">Sobre nós</a><a href="#produtos">Nossos produtos</a><a href="#ofertas">Ofertas</a></div>
+    <div><h3>REDES SOCIAIS</h3><a href="#inicio">Instagram</a><a href="#inicio">Facebook</a><a href="#inicio">TikTok</a></div>
+  </div>
+  <div class="footer-bottom">© 2026 Hippo's Store — Todos os direitos reservados. <span id="dataHora">Projeto acadêmico — HTML + CSS + JavaScript</span></div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
